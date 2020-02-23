@@ -1,5 +1,7 @@
 #!/bin/bash
 
+LC_ALL=C.UTF-8
+
 cd /usr/local/src
 
 sudo curl -o sources.list https://raw.githubusercontent.com/sanjaya-solusindo/setup-server/master/ubuntu/sources.list
@@ -13,6 +15,7 @@ sudo echo 'deb http://nginx.org/packages/ubuntu/ bionic nginx' > /etc/apt/source
 sudo echo 'deb-src http://nginx.org/packages/ubuntu/ bionic nginx' >> /etc/apt/sources.list.d/nginx.list
 sudo curl -L https://nginx.org/keys/nginx_signing.key | sudo apt-key add -
 sudo curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+sudo add-apt-repository -y ppa:ondrej/php
 sudo apt upgrade -y
 sudo apt install -y dpkg-dev build-essential zlib1g-dev libpcre3 libpcre3-dev unzip zip nano curl git uuid-dev debhelper po-debconf libexpat-dev libgd-dev libgeoip-dev libhiredis-dev libluajit-5.1-dev libmhash-dev libpam0g-dev libperl-dev libssl-dev libxslt1-dev quilt libxml2-dev rcs libpng-dev libwebp-dev
 sudo apt install -y mariadb-server 
