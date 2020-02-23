@@ -8,7 +8,7 @@ sudo apt-key adv --fetch-keys 'https://mariadb.org/mariadb_release_signing_key.a
 sudo echo 'deb [arch=amd64,arm64,ppc64el] http://mirror.marwan.ma/mariadb/repo/10.4/ubuntu bionic main' > /etc/apt/sources.list.d/mariadb.list
 sudo echo 'deb-src [arch=amd64,arm64,ppc64el] http://mirror.marwan.ma/mariadb/repo/10.4/ubuntu bionic main' >> /etc/apt/sources.list.d/mariadb.list
 sudo echo 'deb http://nginx.org/packages/ubuntu/ bionic nginx' > /etc/apt/sources.list.d/nginx.list
-echo echo 'deb-src http://nginx.org/packages/ubuntu/ bionic nginx' >> /etc/apt/sources.list.d/nginx.list
+sudo echo 'deb-src http://nginx.org/packages/ubuntu/ bionic nginx' >> /etc/apt/sources.list.d/nginx.list
 sudo curl -L https://nginx.org/keys/nginx_signing.key | sudo apt-key add -
 sudo curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt upgrade -y
