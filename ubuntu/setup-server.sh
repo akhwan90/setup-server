@@ -5,9 +5,8 @@ LC_ALL=C.UTF-8
 
 cd /usr/local/src
 
-curl -o sources.list https://raw.githubusercontent.com/sanjaya-solusindo/setup-server/master/ubuntu/sources.list
-cat sources.list > /etc/apt/sources.list
-apt install software-properties-common
+mv /etc/apt/sources.list /etc/apt/sources.list.bak
+curl -o /etc/apt/sources.list https://raw.githubusercontent.com/sanjaya-solusindo/setup-server/master/ubuntu/sources.list
 apt-key adv --fetch-keys 'https://mariadb.org/mariadb_release_signing_key.asc'
 curl -L https://nginx.org/keys/nginx_signing.key | apt-key add -
 
@@ -18,7 +17,7 @@ echo 'deb-src http://nginx.org/packages/ubuntu/ bionic nginx' >> /etc/apt/source
 add-apt-repository -y ppa:ondrej/php
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 apt upgrade -y
-apt install -y dpkg-dev build-essential zlib1g-dev libpcre3 libpcre3-dev unzip zip nano curl git uuid-dev debhelper po-debconf libexpat-dev libgd-dev libgeoip-dev libhiredis-dev libluajit-5.1-dev libmhash-dev libpam0g-dev libperl-dev libssl-dev libxslt1-dev quilt libxml2-dev rcs libpng-dev libwebp-dev
+apt install -y software-properties-common wget dpkg-dev build-essential zlib1g-dev libpcre3 libpcre3-dev unzip zip nano curl git uuid-dev debhelper po-debconf libexpat-dev libgd-dev libgeoip-dev libhiredis-dev libluajit-5.1-dev libmhash-dev libpam0g-dev libperl-dev libssl-dev libxslt1-dev quilt libxml2-dev rcs libpng-dev libwebp-dev
 apt install -y mariadb-server nodejs redis-server 
 apt install -y php7.4 php-http php-imagick php-mailparse php-memcache php-memcached php-mongodb php-redis php-uploadprogress php-uuid php-psr php-xdebug php7.4-bcmath php7.4-bz2 php7.4-cgi php7.4-cli php7.4-common php7.4-curl php7.4-dba php7.4-enchant php7.4-fpm php7.4-gd php7.4-gmp php7.4-imap php7.4-interbase php7.4-intl php7.4-json php7.4-ldap php7.4-mbstring php7.4-mysql php7.4-odbc php7.4-opcache php7.4-pgsql php7.4-phpdbg php7.4-pspell php7.4-readline php7.4-snmp php7.4-soap php7.4-sqlite3 php7.4-sybase php7.4-tidy php7.4-xml php7.4-xmlrpc php7.4-xsl php7.4-zip 
 
@@ -52,7 +51,7 @@ git clone --recursive https://github.com/google/ngx_brotli.git
 git clone --recursive https://github.com/openresty/headers-more-nginx-module.git
 
 NPS_VERSION=1.13.35.2-stable
-curl -O https://github.com/apache/incubator-pagespeed-ngx/archive/v${NPS_VERSION}.zip
+wget https://github.com/apache/incubator-pagespeed-ngx/archive/v${NPS_VERSION}.zip
 unzip v${NPS_VERSION}.zip
 nps_dir=$(find . -name "*pagespeed-ngx-${NPS_VERSION}" -type d)
 cd $nps_dir
@@ -65,8 +64,7 @@ cd /usr/local/src/incubator-pagespeed-*/
 nps_dir=$(pwd)
 cd /usr/local/src/nginx-*/
 sed -i "s#--with-cc-opt=#--add-module=/usr/local/src/ngx_brotli --add-module=/usr/local/src/headers-more-nginx-module --add-module=${nps_dir} --with-cc-opt=#g" debian/rules
-dpkg-buildpackage -y -b -uc -us
-
+dpkg-buildpackage -b -uc -us
 cd /usr/local/src
 dpkg -i *.deb
 openssl dhparam -out /etc/ssl/certs/dhparam.pem 4096
