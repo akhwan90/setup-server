@@ -2,6 +2,8 @@
 
 sudo cd /usr/local/src
 
+sudo curl -o sources.list https://raw.githubusercontent.com/sanjaya-solusindo/setup-server/master/ubuntu/sources.list
+sudo cat sources.list > /etc/apt/sources.list
 sudo timedatectl set-timezone Asia/Jakarta
 sudo apt install software-properties-common
 sudo apt-key adv --fetch-keys 'https://mariadb.org/mariadb_release_signing_key.asc'
