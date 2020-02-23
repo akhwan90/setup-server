@@ -2,6 +2,8 @@
 ## Please run this with sudo ./setup-server.sh
 
 LC_ALL=C.UTF-8
+echo 'fs.file-max = 100000' >> /etc/sysctl.conf
+sysctl -p 
 
 cd /usr/local/src
 
