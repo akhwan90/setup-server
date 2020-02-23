@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo cd /usr/local/src
+cd /usr/local/src
 
 sudo curl -o sources.list https://raw.githubusercontent.com/sanjaya-solusindo/setup-server/master/ubuntu/sources.list
 sudo cat sources.list > /etc/apt/sources.list
@@ -15,8 +15,10 @@ sudo curl -L https://nginx.org/keys/nginx_signing.key | sudo apt-key add -
 sudo curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt upgrade -y
 sudo apt install -y dpkg-dev build-essential zlib1g-dev libpcre3 libpcre3-dev unzip zip nano curl git uuid-dev debhelper po-debconf libexpat-dev libgd-dev libgeoip-dev libhiredis-dev libluajit-5.1-dev libmhash-dev libpam0g-dev libperl-dev libssl-dev libxslt1-dev quilt libxml2-dev rcs libpng-dev libwebp-dev
-sudo apt install -y mariadb-server nodejs redis-server php7.4
-sudo apt install -y php-http php-imagick php-mailparse php-memcache php-memcached php-mongodb php-redis php-uploadprogress php-uuid php-psr php-xdebug php7.4-bcmath php7.4-bz2 php7.4-cgi php7.4-cli php7.4-common php7.4-curl php7.4-dba php7.4-enchant php7.4-fpm php7.4-gd php7.4-gmp php7.4-imap php7.4-interbase php7.4-intl php7.4-json php7.4-ldap php7.4-mbstring php7.4-mysql php7.4-odbc php7.4-opcache php7.4-pgsql php7.4-phpdbg php7.4-pspell php7.4-readline php7.4-snmp php7.4-soap php7.4-sqlite3 php7.4-sybase php7.4-tidy php7.4-xml php7.4-xmlrpc php7.4-xsl php7.4-zip 
+sudo apt install -y mariadb-server 
+sudo apt install -y nodejs 
+sudo apt install -y redis-server 
+sudo apt install -y php7.4 php-http php-imagick php-mailparse php-memcache php-memcached php-mongodb php-redis php-uploadprogress php-uuid php-psr php-xdebug php7.4-bcmath php7.4-bz2 php7.4-cgi php7.4-cli php7.4-common php7.4-curl php7.4-dba php7.4-enchant php7.4-fpm php7.4-gd php7.4-gmp php7.4-imap php7.4-interbase php7.4-intl php7.4-json php7.4-ldap php7.4-mbstring php7.4-mysql php7.4-odbc php7.4-opcache php7.4-pgsql php7.4-phpdbg php7.4-pspell php7.4-readline php7.4-snmp php7.4-soap php7.4-sqlite3 php7.4-sybase php7.4-tidy php7.4-xml php7.4-xmlrpc php7.4-xsl php7.4-zip 
 
 sudo npm i -g npm
 sudo npm i -g yarn
@@ -62,11 +64,13 @@ NPS_DIR=$(pwd)
 sudo cd /usr/local/src/nginx-*/
 sudo sed -i "s#--with-cc-opt=#--add-module=/usr/local/src/ngx_brotli --add-module=/usr/local/src/headers-more-nginx-module --add-module=${NPS_DIR} --with-cc-opt=#g" debian/rules
 sudo dpkg-buildpackage -b -uc -us -y
-sudo cd /usr/local/src/
+
+cd /usr/local/src
 sudo dpkg -i *.deb
 sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 4096
 sudo systemctl stop apache2
 sudo systemctl disable apache2
 sudo systemctl enable mariadb
 sudo systemctl enable redis-server
-sudo reboot
+
+echo "Done!\n"
