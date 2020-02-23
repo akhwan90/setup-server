@@ -27,20 +27,20 @@ sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 sudo php -r "unlink('composer-setup.php');"
 sudo chmod +x /usr/local/bin/composer
 
-sudo echo '[client]' > /etc/myclass/mariadb.conf.d/client.cnf
-sudo echo 'default-character-set = utf8' >> /etc/myclass/mariadb.conf.d/client.cnf
-sudo echo '[mysqld]' > /etc/myclass/mariadb.conf.d/mysqld.cnf
-sudo echo 'character-set-server = utf8' >> /etc/myclass/mariadb.conf.d/client.cnf
-sudo echo 'collation-server = utf8_general_ci' >> /etc/myclass/mariadb.conf.d/client.cnf
-sudo echo 'character_set_server = utf8' >> /etc/myclass/mariadb.conf.d/client.cnf
-sudo echo 'collation_server = utf8_general_ci' >> /etc/myclass/mariadb.conf.d/client.cnf
-sudo echo 'local-infile = 0' >> /etc/myclass/mariadb.conf.d/client.cnf
-sudo echo 'performance-schema = 0' >> /etc/myclass/mariadb.conf.d/client.cnf
-sudo echo 'symbolic-links = 0' >> /etc/myclass/mariadb.conf.d/client.cnf
-sudo echo 'innodb_buffer_pool_size = 134217728' >> /etc/myclass/mariadb.conf.d/client.cnf
-sudo echo 'max_allowed_packet = 268435456' >> /etc/myclass/mariadb.conf.d/client.cnf
-sudo echo 'open_files_limit = 10000' >> /etc/myclass/mariadb.conf.d/client.cnf
-sudo echo 'innodb_file_per_table = 1' >> /etc/myclass/mariadb.conf.d/client.cnf
+sudo echo '[client]' > /etc/mysql/mariadb.conf.d/client.cnf
+sudo echo 'default-character-set = utf8' >> /etc/mysql/mariadb.conf.d/client.cnf
+sudo echo '[mysqld]' > /etc/mysql/mariadb.conf.d/mysqld.cnf
+sudo echo 'character-set-server = utf8' >> /etc/mysql/mariadb.conf.d/client.cnf
+sudo echo 'collation-server = utf8_general_ci' >> /etc/mysql/mariadb.conf.d/client.cnf
+sudo echo 'character_set_server = utf8' >> /etc/mysql/mariadb.conf.d/client.cnf
+sudo echo 'collation_server = utf8_general_ci' >> /etc/mysql/mariadb.conf.d/client.cnf
+sudo echo 'local-infile = 0' >> /etc/mysql/mariadb.conf.d/client.cnf
+sudo echo 'performance-schema = 0' >> /etc/mysql/mariadb.conf.d/client.cnf
+sudo echo 'symbolic-links = 0' >> /etc/mysql/mariadb.conf.d/client.cnf
+sudo echo 'innodb_buffer_pool_size = 134217728' >> /etc/mysql/mariadb.conf.d/client.cnf
+sudo echo 'max_allowed_packet = 268435456' >> /etc/mysql/mariadb.conf.d/client.cnf
+sudo echo 'open_files_limit = 10000' >> /etc/mysql/mariadb.conf.d/client.cnf
+sudo echo 'innodb_file_per_table = 1' >> /etc/mysql/mariadb.conf.d/client.cnf
 
 sudo apt source nginx -y
 sudo apt build-dep nginx -y
@@ -64,9 +64,7 @@ sudo sed -i "s#--with-cc-opt=#--add-module=/usr/local/src/ngx_brotli --add-modul
 sudo dpkg-buildpackage -b -uc -us -y
 sudo cd /usr/local/src/
 sudo dpkg -i *.deb
-
-openssl dhparam -out /etc/ssl/certs/dhparam.pem 4096
-
+sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 4096
 sudo systemctl stop apache2
 sudo systemctl disable apache2
 sudo systemctl enable mariadb
