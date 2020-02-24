@@ -22,7 +22,8 @@ apt upgrade -y
 apt install -y software-properties-common wget dpkg-dev build-essential zlib1g-dev libpcre3 libpcre3-dev unzip zip nano curl git uuid-dev debhelper po-debconf libexpat-dev libgd-dev libgeoip-dev libhiredis-dev libluajit-5.1-dev libmhash-dev libpam0g-dev libperl-dev libssl-dev libxslt1-dev quilt libxml2-dev rcs libpng-dev libwebp-dev
 apt install -y mariadb-server nodejs redis-server 
 apt install -y php7.4 php-http php-imagick php-mailparse php-memcache php-memcached php-mongodb php-redis php-uploadprogress php-uuid php-psr php-xdebug php7.4-bcmath php7.4-bz2 php7.4-cgi php7.4-cli php7.4-common php7.4-curl php7.4-dba php7.4-enchant php7.4-fpm php7.4-gd php7.4-gmp php7.4-imap php7.4-interbase php7.4-intl php7.4-json php7.4-ldap php7.4-mbstring php7.4-mysql php7.4-odbc php7.4-opcache php7.4-pgsql php7.4-phpdbg php7.4-pspell php7.4-readline php7.4-snmp php7.4-soap php7.4-sqlite3 php7.4-sybase php7.4-tidy php7.4-xml php7.4-xmlrpc php7.4-xsl php7.4-zip 
-sudo sed -i "s#;cgi.fix_pathinfo=1#cgi.fix_pathinfo=0#g" /etc/php/7.4/cli/php.ini
+sudo sed -i "s#cgi.fix_pathinfo=1#cgi.fix_pathinfo=0#g" /etc/php/7.4/fpm/php.ini # nginx php-fpm patch
+sudo sed -i "s#;cgi.fix_pathinfo=0#cgi.fix_pathinfo=0#g" /etc/php/7.4/fpm/php.ini # nginx php-fpm patch
 
 npm i -g npm
 npm i -g yarn
